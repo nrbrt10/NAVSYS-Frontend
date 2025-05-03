@@ -1,4 +1,4 @@
-import { useState, useRef, Ref, RefObject } from 'react';
+import { useState, RefObject } from 'react';
 import * as THREE from 'three'
 
 export function useSelectable(

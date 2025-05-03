@@ -13,20 +13,21 @@ interface GridProps {
 
 export function Grid({name, color, initialPos, movementFn, onSelect}: GridProps & {onSelect: (ref: RefObject<THREE.Mesh>) => void; }) {
     const gridRef = useRef<THREE.Mesh>(null!);
-    const [hasInitialized, setInitialized] = useState(false);
+    const initialized = useRef(false);
 
     const { hovered, eventHandlers } = useSelectable(gridRef, onSelect);
 
     useFrame((state, delta) => {
-        if (gridRef.current && !hasInitialized) {
+        if (gridRef.current && !initialized.current) {
             gridRef.current.position.set(initialPos.x, initialPos.y, initialPos.z);
-            setInitialized(true);
+            initialized.current =true;
         }
-        if (gridRef.current && hasInitialized) {
+        if (gridRef.current && initialized.current) {
             gridRef.current.position.add(new THREE.Vector3(movementFn.x, movementFn.y, movementFn.z))
         }
     
-    })
+    });
+    
     return (
         <mesh ref={gridRef} name={name} {...eventHandlers} >
             <boxGeometry args={[1, 1, 1]} />
