@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useDXInstances } from '../hooks/useDXInstances.ts';
+import { usePointsOfInterest } from '../hooks/usePointsOfInterest.ts';
+import { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Planet, DX } from './World'
-import { Grid } from './SEGrid';
+import { POI, DX } from './World'
+import { Grid } from './Grid';
+import { FollowOrbitControls } from './FollowOrbitControls';
 import { 
     GizmoViewport,
     GizmoHelper,
-    OrbitControls
  } from '@react-three/drei';
 import * as THREE from 'three';
+
 
 const grids = [
     { name: 'Sudentor', color: 'red', initialPos: {x: 11, y: 1, z: 0}, movementFn: {x: .001, y: -.003, z: .001} },
@@ -16,58 +19,77 @@ const grids = [
     { name: 'Aegir', color: 'purple', initialPos: {x: 12, y: 4, z: 0}, movementFn: {x: .002, y: -.002, z: .001} }
   ];
 
-const planets = [
-    { name: 'Earth', pos: {x: 0, y: 0, z: 0}, radius: 10, color: 'blue' },
-    { name: 'Luna', pos: {x: 0, y: 15, z: 15}, radius: 2, color: 'gray' },
-    { name: 'Mars', pos: {x: 0, y: 30, z: 0}, radius: 4, color: 'red' }
-]
-
-const dx = [
-    { name: 'dx1', pos: {x: 0, y: 0, z: 0}, radius: 50, color: 'white'},
-    { name: 'dx2', pos: {x: 80, y: 0, z: 5}, radius: 20, color: 'white'}
-]
-
 export function CanvasWrapper() {
-    const [targetRef, setTargetRef] = useState<THREE.Object3D | null>(null);
+    const [ targetRef, setTargetRef ] = useState<THREE.Object3D | null>(null);
+    const [ viewMode, setViewMode ] = useState<'zone' | 'system'>('system');
+    const viewState = {viewMode, setViewMode};
+    const { dx, loadingDX } = useDXInstances();
+    const { pois, loadingPOIs } = usePointsOfInterest();
 
-        return (
+    useEffect(() => {
+        if (viewMode === 'system') {
+            setTargetRef(null);
+        }
+    }, [viewMode])
+    
+    return (
+        <>
+            <button onClick={() => {if (viewMode === 'zone') {setViewMode('system')}}}>System View</button>
             <Canvas>
                 <ambientLight />
-                <OrbitControls enablePan enableZoom target={targetRef?.position ?? new THREE.Vector3(0, 0, 0)} />
+                <FollowOrbitControls
+                    targetRef={targetRef}
+                    viewState={viewState}
+                />
                 <GizmoHelper alignment='bottom-right'>
                     <GizmoViewport />
                 </GizmoHelper>
-                <axesHelper args={[100]}/>
-                {grids.map((grid) => (
-                    <Grid
-                        name={grid.name}
-                        color={grid.color}
-                        initialPos={grid.initialPos}
-                        movementFn={grid.movementFn}
-                        onSelect={(ref) => setTargetRef(ref.current)}
-                    />)
-                )
+                {/* <axesHelper args={[100]}/> */}
+                {grids.map((grid, i) => (
+                        <Grid
+                            key={`box-${i}`}
+                            name={grid.name}
+                            color={grid.color}
+                            initialPos={grid.initialPos}
+                            movementFn={grid.movementFn}
+                            viewState={viewState}
+                            onSelect={(ref) => setTargetRef(ref.current)}
+                        />
+                    ))
                 }
-                {planets.map((planet) => (
-                    <Planet
-                        name={planet.name}
-                        pos={planet.pos}
-                        radius={planet.radius}
-                        color={planet.color}
-                    />
-                    )
-                )}
-                {dx.map((dx) => (
-                    <DX
-                        name={dx.name}
-                        pos={dx.pos}
-                        radius={dx.radius}
-                        color={dx.color}
-                        onSelect={(ref) => setTargetRef(ref.current)}
-                    />
-                    )
-                )}
+                {!loadingPOIs &&
+                    pois.map((poi) => (
+                        <POI
+                            key={`poi-${poi.id}`}
+                            id={poi.id}
+                            name={poi.name}
+                            pos={poi.position}
+                            radius={poi.radius}
+                            color={poi.color}
+                            viewState={viewState}
+                            onSelect={(ref) => setTargetRef(ref.current)}
+                        />
+                    ))
+                }
+                {!loadingDX && 
+                    dx.map((instance) => (
+                        <DX 
+                            key={`dx-${instance.id}`}
+                            id={instance.id}
+                            name={instance.name}
+                            pos={instance.position}
+                            color={instance.color}
+                            radius={instance.radius}
+                            viewState={viewState}
+                            onSelect={(ref) => setTargetRef(ref.current)}
+                        />
+                    ))
+                }
             </Canvas>
+        </>
         )
+}
 
+function SystemView() {
+    
 }
