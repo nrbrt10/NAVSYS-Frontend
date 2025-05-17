@@ -26,6 +26,19 @@ export type DXInstance = {
     radius: number;
   };
 
+  export type Grid = {
+    uuid: string;
+    grid_name: string;
+    faction_tag: string;
+    position: {
+      x: number;
+      y: number;
+      z: number;
+    };
+    created_at: string;
+    color: string
+  }
+
   export type ViewMode = 'zone' | 'system'
 
   export type ViewState = {
@@ -35,8 +48,8 @@ export type DXInstance = {
 
   export type CameraContext = {
     camera: THREE.Camera;
-    controls: OrbitControls;
+    controls: React.ComponentRef<typeof OrbitControls> | null;
     target: THREE.Vector3;
   }
 
-  type CameraBehavior = (ctx: CameraContext) => boolean;
+  export type CameraBehavior = (ctx: CameraContext) => boolean;

@@ -6,6 +6,7 @@ import { useSelectable } from '../hooks/useSelectable.ts'
 import { scalePosition, scaleValue } from '../utils/scalePositions.ts';
 import { ViewState } from '../types/types.ts';
 import { useTexture } from '@react-three/drei';
+import { Tooltip } from './Tooltip.tsx';
 
 const supportedPlanets = [
     'earth',
@@ -31,9 +32,9 @@ export interface WorldProps {
 
 export function POI({id, name, pos, radius, color, viewState, onSelect}: WorldProps & {onSelect: (ref: RefObject<THREE.Mesh>) => void;}) {
     const poiRef = useRef<Mesh>(null!);
-    const {x, y, z} = scalePosition(pos, viewState.viewMode);
+    const scaledPosition = scalePosition(pos, viewState.viewMode);
     const scaledRadius = scaleValue(radius, viewState.viewMode);
-    const posArray: [number, number, number] = [x, y, z];
+    const posArray: [number, number, number] = [scaledPosition.x, scaledPosition.y, scaledPosition.z];
 
     const { hovered, eventHandlers } = useSelectable(poiRef, viewState, onSelect);
 
@@ -45,10 +46,19 @@ export function POI({id, name, pos, radius, color, viewState, onSelect}: WorldPr
     }, [viewState.viewMode])
 
     return (
-        <mesh ref={poiRef} name={name} position={posArray} {...eventHandlers}>
-            <sphereGeometry args={[scaledRadius, 16, 16]} />
-            <meshStandardMaterial color = {color} />
-        </mesh>
+        <>
+            <Tooltip
+                data={name}
+                position={scaledPosition}
+                viewMode={viewState.viewMode}
+                hovered={hovered}
+            />
+            <mesh ref={poiRef} name={name} position={posArray} {...eventHandlers}>
+                <sphereGeometry args={[scaledRadius, 16, 16]} />
+                <meshStandardMaterial color = {color} emissive={hovered ? "cornsilk": color}/>
+            </mesh>
+
+        </>
     )
 }
 

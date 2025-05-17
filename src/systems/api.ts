@@ -11,3 +11,8 @@ export const fetchPointsOfInterest = async () => {
     const response = await axios.get(`${ASTRA_ROOT_URL}/api/v1/pois/`);
     return response.data;
 }
+
+export const fetchLatestGrids = async () => {
+    const response = await axios.get(`${ASTRA_ROOT_URL}/api/v1/grid_positions/latest/`);
+    return response.data
+}
