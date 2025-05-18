@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const rootURL = import.meta.env.BACKEND_ROOT || 'http://127.0.0.1:8000';
+const rootURL = import.meta.env.VITE_BACKEND_ROOT || 'http://127.0.0.1:8000';
 
 export const fetchDXInstances = async () => {
     const response = await axios.get(`${rootURL}/api/v1/dx_instances/`);
