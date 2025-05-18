@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useLatestGrids } from "./useLatestGrids";
 import { Grid } from "../types/types";
 

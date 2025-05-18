@@ -1,8 +1,7 @@
-import { RefObject, useMemo, useRef, useEffect } from 'react';
+import { RefObject, useRef, useEffect } from 'react';
 import { scalePosition } from '../utils/scalePositions.ts';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { Html } from '@react-three/drei';
 import { Tooltip } from './Tooltip.tsx';
 import { useSelectable } from '../hooks/useSelectable.ts'
 import { ViewState } from '../types/types.ts';
@@ -41,7 +40,7 @@ export function Grid({uuid, grid_name, faction_tag, position, created_at, iff_id
         }
     }, [])
 
-    useFrame((state, delta) => {
+    useFrame(() => {
         if (gridRef.current && !initialized.current) {
             gridRef.current.position.set(scaledPosition.x, scaledPosition.y, scaledPosition.z);
             initialized.current = true;

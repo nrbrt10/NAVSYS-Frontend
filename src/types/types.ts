@@ -36,7 +36,7 @@ export type DXInstance = {
       z: number;
     };
     created_at: string;
-    color: string
+    iff_id: string;
   }
 
   export type ViewMode = 'zone' | 'system'

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, RefObject, useMemo } from 'react'
+import { useRef, useEffect, useMemo } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls as DreiOrbitControls } from 'three-stdlib';
 import { OrbitControls } from '@react-three/drei'
