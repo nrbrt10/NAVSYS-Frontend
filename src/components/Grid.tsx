@@ -21,7 +21,7 @@ interface GridProps {
     onSelect: (ref: RefObject<THREE.Mesh>) => void;
 }
 
-export function Grid({uuid, grid_name, faction_tag, position, created_at, iff_id, viewState, onSelect}: GridProps & {onSelect: (ref: RefObject<THREE.Mesh>) => void; }) {
+export function Grid({grid_name, faction_tag, position, iff_id, viewState, onSelect}: GridProps & {onSelect: (ref: RefObject<THREE.Mesh>) => void; }) {
     const gridRef = useRef<THREE.Mesh>(null!);
     const initialized = useRef(false);
     const scaledPosition = scalePosition(position, viewState.viewMode);
