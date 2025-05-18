@@ -24,7 +24,7 @@ export function Tooltip({data, position, viewMode, hovered} : TooltipProps) {
 
     return (
         <Billboard position={tt_pos} follow={true} lockX={false} lockY={false} lockZ={false}>
-            <Text fontSize={10} color="white">
+            <Text font="/assets/fonts/helvetiker_regular.typeface.json" fontSize={10} color="white">
                 {`${data}`}
             </Text>
         </Billboard>
