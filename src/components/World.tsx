@@ -1,24 +1,10 @@
 import { RefObject, useRef, useEffect } from 'react';
 import { Mesh } from 'three';
 import * as THREE from 'three';
-
 import { useSelectable } from '../hooks/useSelectable.ts'
 import { scalePosition, scaleValue } from '../utils/scalePositions.ts';
 import { ViewState } from '../types/types.ts';
-import { useTexture } from '@react-three/drei';
 import { Tooltip } from './Tooltip.tsx';
-
-const supportedPlanets = [
-    'earth',
-    'jupiter',
-    'saturn',
-    'mars',
-    'uranus',
-    'jannah',
-    'kronos',
-    'ilus',
-    'luna',
-  ]
 
 export interface WorldProps {
     id: number;
@@ -30,7 +16,7 @@ export interface WorldProps {
     onSelect: (ref: RefObject<THREE.Mesh>) => void;
 }
 
-export function POI({id, name, pos, radius, color, viewState, onSelect}: WorldProps & {onSelect: (ref: RefObject<THREE.Mesh>) => void;}) {
+export function POI({name, pos, radius, color, viewState, onSelect}: WorldProps & {onSelect: (ref: RefObject<THREE.Mesh>) => void;}) {
     const poiRef = useRef<Mesh>(null!);
     const scaledPosition = scalePosition(pos, viewState.viewMode);
     const scaledRadius = scaleValue(radius, viewState.viewMode);
@@ -62,13 +48,13 @@ export function POI({id, name, pos, radius, color, viewState, onSelect}: WorldPr
     )
 }
 
-export function DX({id, name, pos, radius, color, viewState, onSelect}: WorldProps & {onSelect: (ref: RefObject<THREE.Mesh>) => void;}) {
+export function DX({name, pos, radius, color, viewState, onSelect}: WorldProps & {onSelect: (ref: RefObject<THREE.Mesh>) => void;}) {
     const dxRef = useRef<Mesh>(null!);
     const {x, y, z} = scalePosition(pos, viewState.viewMode);
     const scaledRadius = scaleValue(radius, viewState.viewMode)
     const posArray: [number, number, number] = [x, y, z];
 
-    const { hovered, eventHandlers } = useSelectable(dxRef, viewState, onSelect);
+    const { eventHandlers } = useSelectable(dxRef, viewState, onSelect);
 
     useEffect(() => {
         if (dxRef.current) {
