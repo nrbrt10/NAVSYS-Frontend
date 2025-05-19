@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import * as THREE from 'three';
 import { Billboard, Text } from "@react-three/drei";
-import { ViewMode } from "../types/types";
-import { scaleValue } from "../utils/scalePositions";
+import { ViewMode } from "../../types/types";
+import { scaleValue } from "../../utils/scalePositions";
 
 
 interface TooltipProps {

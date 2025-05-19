@@ -1,10 +1,10 @@
 import { RefObject, useRef, useEffect } from 'react';
-import { scalePosition } from '../utils/scalePositions.ts';
+import { scalePosition } from '../../utils/scalePositions.ts';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Tooltip } from './Tooltip.tsx';
-import { useSelectable } from '../hooks/useSelectable.ts'
-import { ViewState } from '../types/types.ts';
+import { useSelectable } from '../../hooks/useSelectable.ts'
+import { ViewState } from '../../types/types.ts';
 
 interface GridProps {
     uuid: string;

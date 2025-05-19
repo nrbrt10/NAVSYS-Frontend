@@ -1,25 +1,17 @@
-import { useDXInstances } from '../hooks/useDXInstances.ts';
-import { usePointsOfInterest } from '../hooks/usePointsOfInterest.ts';
+import { useDXInstances } from '../../hooks/useDXInstances.ts';
+import { usePointsOfInterest } from '../../hooks/usePointsOfInterest.ts';
 import { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { POI, DX } from './World'
-import { Grid } from './Grid';
-import { FollowOrbitControls } from './FollowOrbitControls';
+import { POI, DX } from './World.tsx'
+import { Grid } from './Grid.tsx';
+import { FollowOrbitControls } from './FollowOrbitControls.tsx';
 import { 
     GizmoViewport,
     GizmoHelper,
  } from '@react-three/drei';
 import * as THREE from 'three';
-import { useRenderedGrids } from '../hooks/useRenderedGrids.tsx';
+import { useRenderedGrids } from '../../hooks/useRenderedGrids.tsx';
 
-
-/* const grids = [
-    { name: 'Sudentor', color: 'red', initialPos: {x: 11, y: 1, z: 0}, movementFn: {x: .001, y: -.003, z: .001} },
-    { name: 'Equinox', color: 'blue', initialPos: {x: 15, y: 2, z: 0}, movementFn: {x: .005, y: .001, z: .001} },
-    { name: 'Banshee', color: 'green', initialPos: {x: 11, y: 3, z: 0}, movementFn: {x: .002, y: -.001, z: .001} },
-    { name: 'Aegir', color: 'purple', initialPos: {x: 12, y: 4, z: 0}, movementFn: {x: .002, y: -.002, z: .001} }
-  ];
- */
 export function CanvasWrapper() {
     const [ targetRef, setTargetRef ] = useState<THREE.Object3D | null>(null);
     const [ viewMode, setViewMode ] = useState<'zone' | 'system'>('system');

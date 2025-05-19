@@ -1,9 +1,9 @@
 import { RefObject, useRef, useEffect } from 'react';
 import { Mesh } from 'three';
 import * as THREE from 'three';
-import { useSelectable } from '../hooks/useSelectable.ts'
-import { scalePosition, scaleValue } from '../utils/scalePositions.ts';
-import { ViewState } from '../types/types.ts';
+import { useSelectable } from '../../hooks/useSelectable.ts'
+import { scalePosition, scaleValue } from '../../utils/scalePositions.ts';
+import { ViewState } from '../../types/types.ts';
 import { Tooltip } from './Tooltip.tsx';
 
 export interface WorldProps {

@@ -3,8 +3,8 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls as DreiOrbitControls } from 'three-stdlib';
 import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three';
-import { CameraBehavior, ViewState } from '../types/types';
-import { followTarget, lerpToTarget } from '../hooks/useCameraBehavior';
+import { CameraBehavior, ViewState } from '../../types/types';
+import { followTarget, lerpToTarget } from '../../hooks/useCameraBehavior';
 
 interface FollowOrbitControlsProps {
     targetRef: THREE.Object3D | null,
@@ -51,7 +51,7 @@ export function FollowOrbitControls( {
         const ctrl = controlsRef.current;
         if (!ctrl) return;
 
-        const ctx = { camera, controls: controlsRef.current!, target };
+        const ctx = { camera, controls: ctrl!, target };
 
         behaviors.current = behaviors.current.filter(fn => fn(ctx));
         controlsRef.current!.update()

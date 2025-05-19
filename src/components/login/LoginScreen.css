@@ -1,0 +1,34 @@
+.login-page{
+    background-image: url('/assets/login/NAVSYS-bg.png');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-content{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    text-align: center;
+    color: white;
+}
+
+.login-button{
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: #00bcd4;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover{
+    background-color: #0097a7;
+}

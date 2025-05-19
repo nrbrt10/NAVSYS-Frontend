@@ -1,10 +1,10 @@
 import { CameraBehavior } from "../types/types";
 import * as THREE from 'three';
 
-export function lerpToTarget(speed = 0.05, radius = 20): CameraBehavior {
+export function lerpToTarget(speed = 0.05): CameraBehavior {
     return ({ camera, target }) => {
         camera.position.lerp(target, speed);
-        return camera.position.distanceTo(target) > radius;
+        return camera.position.distanceTo(target) > .1;
     }
 }
 
