@@ -1,9 +1,8 @@
 import { fetchRoot } from "../../systems/api";
-import { CanvasWrapper } from "../../components/map/CanvasWrapper";
 import { useEffect, useState } from "react";
 
 export function useRoot(pollInterval: number = 2000) {
-    const [status, setStatus] = useState<'OK' | null>(null);
+    const [status, setStatus] = useState<'NAVSYS' | null>(null);
     const [loadingMap, setLoading] = useState(true);
 
     useEffect(() => {

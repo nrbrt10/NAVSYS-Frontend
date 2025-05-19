@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { LoginScreen } from './components/login/LoginScreen'
-import { CanvasWrapper } from './components/map/CanvasWrapper'
 
 function App() {
   return (

@@ -1,12 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { useRoot } from '../../hooks/login/useRoot.ts'
 import './LoginScreen.css';
-import { useEffect } from 'react';
 
 export function LoginScreen() {
-    
-
-    const navigate = useNavigate();
 
     const hangleLoginClick = () => {    
         const { status, loadingMap } = useRoot();
