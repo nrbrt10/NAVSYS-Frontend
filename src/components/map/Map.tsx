@@ -10,9 +10,9 @@ import {
     GizmoHelper,
  } from '@react-three/drei';
 import * as THREE from 'three';
-import { useRenderedGrids } from '../../hooks/useRenderedGrids.tsx';
+import { useRenderedGrids } from '../../hooks/useRenderedGrids.ts';
 
-export function CanvasWrapper() {
+export function Map() {
     const [ targetRef, setTargetRef ] = useState<THREE.Object3D | null>(null);
     const [ viewMode, setViewMode ] = useState<'zone' | 'system'>('system');
     const viewState = {viewMode, setViewMode};

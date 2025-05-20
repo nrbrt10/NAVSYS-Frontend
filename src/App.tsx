@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { LoginScreen } from './components/login/LoginScreen'
+import { LoginPage } from './pages/LoginPage.tsx'
+import { MapPage } from './pages/MapPage.tsx'
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/components/login" element={<LoginScreen />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/map" element={<MapPage />} />
       </Routes>
     </Router>
-    // <div style={{width: '100vw', height: '100vh'}}>
-    //   <CanvasWrapper />
-    // </div>
   )
 }
 
